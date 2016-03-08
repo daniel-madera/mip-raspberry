@@ -16,7 +16,7 @@ def main():
     button = Tkinter.Button(app, text="Ok!", command=button_clicked)
     button.pack()
 
-    app.mailoop()
+    app.mainloop()
 
 
 if __name__ == '__main__':
