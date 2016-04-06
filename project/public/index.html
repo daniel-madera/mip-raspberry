@@ -17,7 +17,48 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!-- My CSS -->
-    <link href="main.css" rel="stylesheet">
+    <style type="text/css">
+    .led {
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        margin: auto;
+        border: solid 1px gray;
+        background: silver;
+    }
+    
+    .led-red {
+        background: darkred;
+    }
+    
+    .led-red.active {
+        background: red;
+    }
+    
+    .led-green {
+        background: darkgreen;
+    }
+    
+    .led-green.active {
+        background: green;
+    }
+    
+    .led-blue {
+        background: darkblue;
+    }
+    
+    .led-blue.active {
+        background: blue;
+    }
+    
+    .led-white {
+        background: silver;
+    }
+    
+    .led-white.active {
+        background: white;
+    }
+    </style>
 </head>
 
 <body>
@@ -27,7 +68,6 @@
             <div class="container text-center">
                 <h1>MIP - Smart Home</h1>
                 <p>Dvořák, Gabriel, Kozdeba, Křížek, Maděra</p>
-                <a href="https://github.com/daniel-madera/mip-raspberry">https://github.com/daniel-madera/mip-raspberry</a>
             </div>
         </div>
     </header>
@@ -37,20 +77,59 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#overview" aria-controls="home" role="tab" data-toggle="tab">Overview</a></li>
-                <li role="presentation"><a href="#livingroom" aria-controls="Living Room" role="tab" data-toggle="tab">Living Room</a></li>
-                <li role="presentation"><a href="#kitchen" aria-controls="Kitchen" role="tab" data-toggle="tab">Kitchen</a></li>
-                <li role="presentation"><a href="#bedroom" aria-controls="Bed Room" role="tab" data-toggle="tab">Bed Room</a></li>
                 <li role="presentation"><a href="#bathroom" aria-controls="Bath Room" role="tab" data-toggle="tab">Bath Room</a></li>
                 <li role="presentation"><a href="#hallway" aria-controls="Hallway" role="tab" data-toggle="tab">Hallway</a></li>
+                <li role="presentation"><a href="#livingroom" aria-controls="Living Room" role="tab" data-toggle="tab">Living Room</a></li>
+                <li role="presentation"><a href="#bedroom" aria-controls="Bed Room" role="tab" data-toggle="tab">Bed Room</a></li>
+                <li role="presentation"><a href="#kitchen" aria-controls="Kitchen" role="tab" data-toggle="tab">Kitchen</a></li>
             </ul>
             <!-- Tab panels -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active" id="overview">overview</div>
-                <div role="tabpanel" class="tab-pane fade" id="livingroom">livingroom</div>
-                <div role="tabpanel" class="tab-pane fade" id="kitchen">kitchen</div>
-                <div role="tabpanel" class="tab-pane fade" id="bedroom">bedroom</div>
+                <div role="tabpanel" class="tab-pane fade in active" id="overview">
+                    <h1>Welcome to our Smart Home!</h1>
+                    <p>To control rooms, please switch to desired room in Tabs above!</p>
+                    <h3>Github</h3>
+                    <p>Feel free to check out our git repo at <a href="https://github.com/daniel-madera/mip-raspberry">https://github.com/daniel-madera/mip-raspberry</a>.</p>
+                    <h3>WebIOPi</h3>
+                    <p>Learn to control your GPIOs using web interface from <a href="http://webiopi.trouch.com/">http://webiopi.trouch.com/</a>.</p>
+                    <h3>GPIO reference</h3>
+                    <p>For more GPIO reference please check out <a href="https://www.raspberrypi.org/documentation/usage/gpio/">https://www.raspberrypi.org/documentation/usage/gpio/</a>.</p>
+                </div>
                 <div role="tabpanel" class="tab-pane fade" id="bathroom">bathroom</div>
                 <div role="tabpanel" class="tab-pane fade" id="hallway">hallway</div>
+                <div role="tabpanel" class="tab-pane fade" id="livingroom">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3>Status</h3>
+                            <div class="row text-center">
+                                <div class="col-sm-6">
+                                    <div class="led led-green"></div>
+                                    <p>Primary light (L1)</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="led led-green active"></div>
+                                    <p>Secondary light (L2)</p>
+                                </div>
+                            </div>
+                            <h3>Control</h3>
+                            <div class="text-center" role="group" aria-label="Room control">
+                                <button type="button" class="btn btn-default">Button (B1)</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>Description</h3>
+                            <p class="text-justify">
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer imperdiet lectus quis justo. Donec quis nibh at felis congue commodo. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Duis condimentum augue id magna semper rutrum. Aliquam ante. Integer in sapien. Maecenas sollicitudin. Et harum quidem rerum facilis est et expedita distinctio. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit.
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>Layout</h3>
+                            <img class="img img-responsive" src="http://placehold.it/400x250">
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="bedroom">bedroom</div>
+                <div role="tabpanel" class="tab-pane fade" id="kitchen">kitchen</div>
             </div>
         </div>
     </content>
@@ -64,7 +143,9 @@
     <!-- Webiopi JS -->
     <script src="webiopi.js"></script>
     <!-- My JS -->
-    <script src="main.js"></script>
+    <script type="text/javascript">
+      
+    </script>
 </body>
 
 </html>
