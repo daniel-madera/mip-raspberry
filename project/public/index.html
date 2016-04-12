@@ -254,49 +254,94 @@
     <!-- Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <!-- Webiopi JS -->
-    <script src="webiopi.js"></script>
+    <script src="/webiopi.js"></script>
     <!-- My JS -->
     <script type="text/javascript">
-    webiopi().ready(function() {
-                var update = function(macro, args, response) {
-                    console.log("UI is being updated.");
-                }
+    //webiopi().ready(function() {
 
-                $("#B1").click(function() {
-                    console.log("B1 clicked");
-                    webiopi().callMacro("b1_clicked", ['b1'], update);
-                });
+    //update UI from response
+    var update = function(macro, args, response) {
+        //expected {{"L1": "1", "L2": "1"}
+        console.log("UI is being updated.");
+        var json = $.parseJSON(response);
+        if (json.L1 == 1) {
+            $("#L1").addClass('active');
+        } else {
+            $("#L1").removeClass('active');
+        }
+        if (json.L2 == 1) {
+            $("#L2").addClass('active');
+        } else {
+            $("#L2").removeClass('active');
+        }
+        if (json.L3 == 1) {
+            $("#L3").addClass('active');
+        } else {
+            $("#L3").removeClass('active');
+        }
+        if (json.L3 == 1) {
+            $("#L4").addClass('active');
+        } else {
+            $("#L4").removeClass('active');
+        }
+        if (json.L3 == 1) {
+            $("#L5").addClass('active');
+        } else {
+            $("#L5").removeClass('active');
+        }
+        if (json.L3 == 1) {
+            $("#6").addClass('active');
+        } else {
+            $("#L6").removeClass('active');
+        }
+        if (json.L3 == 1) {
+            $("#L7").addClass('active');
+        } else {
+            $("#L7").removeClass('active');
+        }
+    }
+    //update(false, false, '{"L1": "1", "L2": "1"}');
 
-                $("#B2").click(function() {
-                    console.log("B2 clicked");
-                    webiopi().callMacro("b2_clicked", ['b2'], update);
-                });
+    $("#B1").click(function() {
+        console.log("B1 clicked");
+        webiopi().callMacro("b1_clicked", [], update);
+    });
 
-                $("#B3").click(function() {
-                    console.log("B3 clicked");
-                    webiopi().callMacro("b3_clicked", ['b3'], update);
-                });
+    $("#B2").click(function() {
+        console.log("B2 clicked");
+        webiopi().callMacro("b2_clicked", [], update);
+    });
 
-                $("#B4").click(function() {
-                    console.log("B4 clicked");
-                    webiopi().callMacro("b4_clicked", ['b4'], update);
-                });
+    $("#B3").click(function() {
+        console.log("B3 clicked");
+        webiopi().callMacro("b3_clicked", [], update);
+    });
 
-                $("#B5").click(function() {
-                    console.log("B5 clicked");
-                    webiopi().callMacro("b5_clicked", ['b5'], update);
-                });
+    $("#B4").click(function() {
+        console.log("B4 clicked");
+        webiopi().callMacro("b4_clicked", [], update);
+    });
 
-                $("#B6").click(function() {
-                    console.log("B6 clicked");
-                    webiopi().callMacro("b6_clicked", ['b6'], update);
-                });
+    $("#B5").click(function() {
+        console.log("B5 clicked");
+        webiopi().callMacro("b5_clicked", [], update);
+    });
 
-                $("#B7").click(function() {
-                    console.log("B7 clicked");
-                    webiopi().callMacro("b7_clicked", ['b7'], update);
-                });
-            })
+    $("#B6").click(function() {
+        console.log("B6 clicked");
+        webiopi().callMacro("b6_clicked", [], update);
+    });
+
+    $("#B7").click(function() {
+        console.log("B7 clicked");
+        webiopi().callMacro("b7_clicked", [], update);
+    });
+
+    // update UI every 1000miliseconds
+    setInterval(function() {
+        webiopi().callMacro("status", [], update);
+    }, 1000);
+    //})
     </script>
 </body>
 

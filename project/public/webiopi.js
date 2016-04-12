@@ -110,7 +110,7 @@ function WebIOPi() {
 			
 		}
 	}
-
+/*
 	var head = document.getElementsByTagName('head')[0];
 
 	var jquery = document.createElement('script');
@@ -122,7 +122,7 @@ function WebIOPi() {
 		};
 //	}
 	head.appendChild(jquery);
-
+*/
 /*
 	if (isMobile()) {
 		console.log("load jquery mobile");
@@ -135,7 +135,7 @@ function WebIOPi() {
 		head.appendChild(mobile);
 	}
 */
-
+/*
 	// GA
 	_gaq.push(['_setAccount', 'UA-33979593-2']);
 	_gaq.push(['_trackPageview']);
@@ -151,7 +151,7 @@ function WebIOPi() {
 	style.type = 'text/css';
 	style.href = '/webiopi.css';
 	head.appendChild(style);
-
+*/
 /*
 	if (isMobile()) {
 		var style = document.createElement('link');
