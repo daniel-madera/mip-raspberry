@@ -28,35 +28,35 @@
     }
     
     .led-red {
-        background: darkred;
+        background: #f90707;
     }
     
     .led-red.active {
-        background: red;
+        background: #f90303;
     }
     
     .led-green {
-        background: darkgreen;
+        background: #378903;
     }
     
     .led-green.active {
-        background: green;
+        background: #57e100;
     }
     
     .led-blue {
-        background: darkblue;
+        background: #150365;
     }
     
     .led-blue.active {
-        background: blue;
+        background: #3407f9;
     }
     
     .led-white {
-        background: silver;
+        background: #c5c5c5;
     }
     
     .led-white.active {
-        background: white;
+        background: #ffffff;
     }
     </style>
 </head>
@@ -221,7 +221,7 @@
                                     <p>červená LED (L6)</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div id="L7" class="led led-green active"></div>
+                                    <div id="L7" class="led led-green"></div>
                                     <p>zelená LED (L7)</p>
                                 </div>
                             </div>
@@ -257,6 +257,46 @@
     <script src="webiopi.js"></script>
     <!-- My JS -->
     <script type="text/javascript">
+    webiopi().ready(function() {
+                var update = function(macro, args, response) {
+                    console.log("UI is being updated.");
+                }
+
+                $("#B1").click(function() {
+                    console.log("B1 clicked");
+                    webiopi().callMacro("b1_clicked", ['b1'], update);
+                });
+
+                $("#B2").click(function() {
+                    console.log("B2 clicked");
+                    webiopi().callMacro("b2_clicked", ['b2'], update);
+                });
+
+                $("#B3").click(function() {
+                    console.log("B3 clicked");
+                    webiopi().callMacro("b3_clicked", ['b3'], update);
+                });
+
+                $("#B4").click(function() {
+                    console.log("B4 clicked");
+                    webiopi().callMacro("b4_clicked", ['b4'], update);
+                });
+
+                $("#B5").click(function() {
+                    console.log("B5 clicked");
+                    webiopi().callMacro("b5_clicked", ['b5'], update);
+                });
+
+                $("#B6").click(function() {
+                    console.log("B6 clicked");
+                    webiopi().callMacro("b6_clicked", ['b6'], update);
+                });
+
+                $("#B7").click(function() {
+                    console.log("B7 clicked");
+                    webiopi().callMacro("b7_clicked", ['b7'], update);
+                });
+            })
     </script>
 </body>
 
