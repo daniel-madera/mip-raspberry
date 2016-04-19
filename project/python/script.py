@@ -21,18 +21,27 @@ B6 = 27
 B7 = 22
 
 
+pwmL5 = None
+duties = [0, 25, 100]
+iduty = 0
+
+
 def setup():
+    global pwmL5
+    global iduty
+    
     # set as output
     GPIO.setFunction(L1, GPIO.OUT)
     GPIO.setFunction(L2, GPIO.OUT)
     GPIO.setFunction(L3, GPIO.OUT)
     GPIO.setFunction(L4, GPIO.OUT)
-    GPIO.setFunction(L5, GPIO.OUT)
+    # GPIO.setFunction(L5, GPIO.OUT)
     GPIO.setFunction(L6, GPIO.OUT)
     GPIO.setFunction(L7, GPIO.OUT)
 
-    # setup buttons
     RPi.GPIO.setmode(RPi.GPIO.BCM)
+
+    # setup buttons
     RPi.GPIO.setup(B1, RPi.GPIO.IN, pull_up_down=RPi.GPIO.PUD_UP)
     RPi.GPIO.setup(B2, RPi.GPIO.IN, pull_up_down=RPi.GPIO.PUD_UP)
     RPi.GPIO.setup(B3, RPi.GPIO.IN, pull_up_down=RPi.GPIO.PUD_UP)
@@ -50,9 +59,17 @@ def setup():
     RPi.GPIO.add_event_detect(B6, RPi.GPIO.FALLING, callback=btn_callback, bouncetime=500)
     RPi.GPIO.add_event_detect(B7, RPi.GPIO.FALLING, callback=btn_callback, bouncetime=500)
 
+    # led pwm
+    RPi.GPIO.setup(L5, RPi.GPIO.OUT)
+    pwmL5 = RPi.GPIO.PWM(L5, 50)
+    iduty = 0
+    pwmL5.start(duties[iduty])
+    
 
 def loop():
     # logic for hw handlers buttons goes here
+    #pwmL5.ChangeDutyCycle(50)
+    
     pass
 
 
@@ -65,6 +82,8 @@ def destroy():
     GPIO.digitalWrite(L5, GPIO.LOW)
     GPIO.digitalWrite(L6, GPIO.LOW)
     GPIO.digitalWrite(L7, GPIO.LOW)
+
+    pwmL5.stop()
 
     RPi.GPIO.cleanup()
 
@@ -100,7 +119,10 @@ def b4_clicked():
 
 @webiopi.macro
 def b5_clicked():
-    toggle_led(L5)
+    # toggle_led(L5)
+    global iduty
+    iduty = (iduty + 1) % len(duties)
+    pwmL5.ChangeDutyCycle(duties[iduty])
 
 
 @webiopi.macro
