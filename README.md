@@ -2,7 +2,7 @@
 
 ## Úvod
 
-                        Projekt Smart Home jsme vytvořili v rámci předmětu s názvem *Minipočítače a jejich praktické aplikace*. Klíčovým prvkem je Raspberry Pi model B, které nám umožňuje jednotné propojení a komunikaci s jednotlivými místnostmi. Pomocí Raspberry Pi, několika LED diod (dále jen LED) a tlačítkových spínačů jsme tedy nasimulovali „chytrou domácnost“. Jednotlivé místnosti v domácnosti je možné ovládat jak přes tlačítkové spínače, tak i pomocí tohoto webového rozhraní. Domácnost se skládá z následujících místností: Koupelna, Chodba, Obývací pokoj, Ložnice a Kuchyně. Popis jednotlivých místností najdete v příslušné záložce.
+Projekt Smart Home jsme vytvořili v rámci předmětu s názvem *Minipočítače a jejich praktické aplikace*. Klíčovým prvkem je Raspberry Pi model B, které nám umožňuje jednotné propojení a komunikaci s jednotlivými místnostmi. Pomocí Raspberry Pi, několika LED diod (dále jen LED) a tlačítkových spínačů jsme tedy nasimulovali „chytrou domácnost“. Jednotlivé místnosti v domácnosti je možné ovládat jak přes tlačítkové spínače, tak i pomocí tohoto webového rozhraní. Domácnost se skládá z následujících místností: Koupelna, Chodba, Obývací pokoj, Ložnice a Kuchyně. Popis jednotlivých místností najdete v příslušné záložce.
 
 
 ## Použité technologie
@@ -20,7 +20,11 @@ Pro realizaci projektu jsme použili následující technologie a knihovny:
     cd WebIOPi-x.y.z
     ./setup.sh
 
-## Nastavení WebIOPi
+## WebIOPi
+
+Knihovna WebIOPi zajišťuje webový server a poskytuje REST API, které se nadefinuje v Python skriptu, který potom zpracovává REST požadavky a ovládá periferie. V internetovém prohlížeči kienta jsou REST požadavky zasílány pomocí Javascriptu.
+
+### Nastavení
 
 Pro nastavení serveru je potřeba upravit konfigurační soubor, do kterého se zapíše cesta k Python skriptu, který beží na serveru, a také kořenová cesta k adresáři webového serveru:
 
@@ -32,43 +36,41 @@ Pomocí následujícího příkazu se aplikace spustí po spuštění počítač
 
 Webové rozhraní poté beží na RaspberryPi (ve výchozím nastavení na portu 8000) a je možné k němu přistoupit přes lokální síť. Pro připojení je vyžadována autentizace pomocí HTTP s přihlašovacími údaji, které jsou uvedeny ve výše zmíněném konfiguračním souboru.
 
-## WebIOPi
-
-Knihovna WebIOPi zajišťuje webový server a poskytuje REST API, které se nadefinuje v Python skriptu, který potom zpracovává REST požadavky a ovládá periferie. V internetovém prohlížeči kienta jsou REST požadavky zasílány pomocí Javascriptu.
-
 ### Serverová část
 
-    import webiopi
-    import RPi.GPIO
+```python
+import webiopi
+import RPi.GPIO
 
-    button = 15
-    led = 14
+button = 15
+led = 14
 
-    def setup():
-        # set LED as output
-        webiopi.GPIO.setFunction(L1, webiopi.GPIO.OUT)
+def setup():
+    # set LED as output
+    webiopi.GPIO.setFunction(L1, webiopi.GPIO.OUT)
 
-        # setup buttons
-        RPi.GPIO.setmode(RPi.GPIO.BCM)
-        RPi.GPIO.setup(B1, RPi.GPIO.IN, pull_up_down=RPi.GPIO.PUD_UP)
-        RPi.GPIO.add_event_detect(button, RPi.GPIO.FALLING, callback=button_clicked, bouncetime=500)
+    # setup buttons
+    RPi.GPIO.setmode(RPi.GPIO.BCM)
+    RPi.GPIO.setup(B1, RPi.GPIO.IN, pull_up_down=RPi.GPIO.PUD_UP)
+    RPi.GPIO.add_event_detect(button, RPi.GPIO.FALLING, callback=button_clicked, bouncetime=500)
 
-    def loop():
-        pass
+def loop():
+    pass
 
-    def destroy():
-        # turn off LEDS
-        webiopi.GPIO.digitalWrite(led, webiopi.GPIO.LOW)
-        
-        RPi.GPIO.cleanup()
+def destroy():
+    # turn off LEDS
+    webiopi.GPIO.digitalWrite(led, webiopi.GPIO.LOW)
 
-    @webiopi.macro
-    def button_clicked(pin):
-        value = webiopi.GPIO.LOW
-        state = webiopi.GPIO.digitalRead(led)
-        if not state:
-            value = webiopi.GPIO.HIGH
-            webiopi.GPIO.digitalWrite(led, value)
+    RPi.GPIO.cleanup()
+
+@webiopi.macro
+def button_clicked(pin):
+    value = webiopi.GPIO.LOW
+    state = webiopi.GPIO.digitalRead(led)
+    if not state:
+       value = webiopi.GPIO.HIGH
+    webiopi.GPIO.digitalWrite(led, value)
+```
 
 WebIOPi ze skriptu spoští následující funkce:
 
@@ -80,10 +82,12 @@ Ve funkci `setup()` se nastaví pin s LED jako výstupní pomocí `webiopi.GPIO`
 
 ### Klientská část
 
-    webiopi().ready(function() {
-        // Call when button is clicked.
-        webiopi().callMacro("button_clicked", [], update);
-    }
+```javascript
+webiopi().ready(function() {
+    // Call when button is clicked.
+    webiopi().callMacro("button_clicked", [], update);
+}
+```
 
 Na klientovi zajišťuje komunikaci s WebIOPi Javascript. Po naimportování souboru `webiopi.js` je možné použít výše uvedený kód pro vygenerování a odeslání REST požadavku na zavolání makra. Zavoláním funkce `callMacro()` dojde k REST požadavku, který zpracuje WebIOPi na serveru a spustí příslušnou funkci, která je definována v serverovém Python skriptu.
 
