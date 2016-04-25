@@ -68,6 +68,7 @@
             <div class="container text-center">
                 <h1>MIP - Smart Home</h1>
                 <p>Dvořák, Gabriel, Kozdeba, Křížek, Maděra</p>
+                <p><a href="https://github.com/daniel-madera/mip-raspberry">GitHub projektu</a></p>
             </div>
         </div>
     </header>
@@ -76,8 +77,7 @@
         <div class="container">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#overview" aria-controls="home" role="tab" data-toggle="tab">Úvod</a></li>
-                <li role="presentation"><a href="#bathroom" aria-controls="Bath Room" role="tab" data-toggle="tab">Koupelna</a></li>
+                <li role="presentation" class="active"><a href="#bathroom" aria-controls="Bath Room" role="tab" data-toggle="tab">Koupelna</a></li>
                 <li role="presentation"><a href="#hallway" aria-controls="Hallway" role="tab" data-toggle="tab">Chodba</a></li>
                 <li role="presentation"><a href="#livingroom" aria-controls="Living Room" role="tab" data-toggle="tab">Obývací pokoj</a></li>
                 <li role="presentation"><a href="#bedroom" aria-controls="Bed Room" role="tab" data-toggle="tab">Ložnice</a></li>
@@ -85,20 +85,7 @@
             </ul>
             <!-- Tab panels -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active" id="overview">
-                    <h1>Vítejte v ovládacím centru Smart Home!</h1>
-                    <p>
-                        Projekt Smart Home jsme vytvořili v rámci předmětu s názvem <strong>Minipočítače a jejich praktické aplikace</strong>. Klíčovým prvkem je Raspberry Pi model B, které nám umožňuje jednotné propojení a komunikaci s jednotlivými místnostmi. Pomocí Raspberry Pi, několika LED diod (dále jen LED) a tlačítkových spínačů jsme tedy nasimulovali „chytrou domácnost“. Jednotlivé místnosti v domácnosti je možné ovládat jak přes tlačítkové spínače, tak i pomocí tohoto webového rozhraní. Domácnost se skládá z následujících místností: Koupelna, Chodba, Obývací pokoj, Ložnice a Kuchyně. Popis jednotlivých místností najdete v příslušné záložce.
-                    </p>
-                    <p>Pro ovládání místnosti přejděte do příslušné záložky!</p>
-                    <h3>Github</h3>
-                    <p>Všechny potřebné zdrojové kódy jsou dostupné na <a href="https://github.com/daniel-madera/mip-raspberry">https://github.com/daniel-madera/mip-raspberry</a>.</p>
-                    <h3>WebIOPi</h3>
-                    <p>Více o této knihovně lze nalézt na <a href="http://webiopi.trouch.com/">http://webiopi.trouch.com/</a>.</p>
-                    <h3>GPIO reference</h3>
-                    <p>Pro podorobnosti ohledně zapojení GPIO navštivte <a href="https://www.raspberrypi.org/documentation/usage/gpio/">https://www.raspberrypi.org/documentation/usage/gpio/</a>.</p>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="bathroom">
+                <div role="tabpanel" class="tab-pane fade in active" id="bathroom">
                     <div class="row">
                         <div class="col-md-4">
                             <h3>Status</h3>
@@ -116,7 +103,7 @@
                         <div class="col-md-4">
                             <h3>Popis</h3>
                             <p class="text-justify">
-                                Koupelna je osazena jednou LEDk diodou modré barvy (L1) a jedním spínačem (B1). Na sepnutí spínače se příslušná LEDka rozsvítí a nebo zhasne podle stavu ve kterém se nachází.
+                                Koupelna je osazena jednou LED diodou modré barvy (L1) a jedním spínačem (B1). Na sepnutí spínače se příslušná LED diaoda rozsvítí a nebo zhasne podle stavu ve kterém se nachází.
                             </p>
                         </div>
                         <div class="col-md-4">
@@ -163,7 +150,7 @@
                                     <p>zelená LED (L3)</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div id="L4" class="led led-green active"></div>
+                                    <div id="L4" class="led led-green"></div>
                                     <p>zelená LED (L4)</p>
                                 </div>
                             </div>
@@ -175,7 +162,7 @@
                         <div class="col-md-4">
                             <h3>Popis</h3>
                             <p class="text-justify">
-                                Obývací pokoj je osazen dvěma LED diodami zelené barvy (L3 a L4) a jedním spínačem (B4). Na sepnutí spínače se rozsvítí obě LEDky a při dalším sepnutí spínače obě zhasnou.
+                                Obývací pokoj je osazen dvěma LED diodami zelené barvy (L3 a L4) a jedním spínačem (B4). Na sepnutí spínače se rozsvítí obě LED diody a při dalším sepnutí spínače obě zhasnou.
                             </p>
                         </div>
                         <div class="col-md-4">
@@ -202,7 +189,7 @@
                         <div class="col-md-4">
                             <h3>Popis</h3>
                             <p class="text-justify">
-                                Ložnice je osazena jednou LED diodou bílé barvy (L5) a jedním spínačem (B5). Jak budem vedět regulaci tak doplním.
+                                Ložnice je osazena pouze jednou LED diodou bílé barvy (L5) a jedním spínačem (B5). Spínač funguje jako klascký pokojový přepínač, prvním stiknutím se světlo rozsvítí, druhým pak zhasne.
                             </p>
                         </div>
                         <div class="col-md-4">
@@ -300,7 +287,6 @@
             $("#L7").removeClass('active');
         }
     }
-    //update(false, false, '{"L1": "1", "L2": "1"}');
 
     $("#B1").click(function() {
         console.log("B1 clicked");
