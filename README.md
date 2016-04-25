@@ -2,7 +2,7 @@
 
 ## Úvod
 
-Projekt Smart Home jsme vytvořili v rámci předmětu s názvem *Minipočítače a jejich praktické aplikace*. Klíčovým prvkem je Raspberry Pi model B, které nám umožňuje jednotné propojení a komunikaci s jednotlivými místnostmi. Pomocí Raspberry Pi, několika LED diod (dále jen LED) a tlačítkových spínačů jsme tedy nasimulovali „chytrou domácnost“. Jednotlivé místnosti v domácnosti je možné ovládat jak přes tlačítkové spínače, tak i pomocí tohoto webového rozhraní. Domácnost se skládá z následujících místností: Koupelna, Chodba, Obývací pokoj, Ložnice a Kuchyně. Popis jednotlivých místností najdete v příslušné záložce.
+Projekt Smart Home jsme vytvořili v rámci předmětu s názvem *Minipočítače a jejich praktické aplikace*. Klíčovým prvkem je Raspberry Pi model B, které nám umožňuje jednotné propojení a komunikaci s jednotlivými místnostmi. Pomocí Raspberry Pi, několika LED diod (dále jen LED) a tlačítkových spínačů jsme tedy nasimulovali „chytrou domácnost“. Jednotlivé místnosti v domácnosti je možné ovládat jak přes tlačítkové spínače, tak pomocí webového rozhraní. Domácnost se skládá z následujících místností: Koupelna, Chodba, Obývací pokoj, Ložnice a Kuchyně. Popis jednotlivých místností najdete v příslušné záložce.
 
 
 ## Použité technologie
@@ -91,6 +91,17 @@ webiopi().ready(function() {
 
 Na klientovi zajišťuje komunikaci s WebIOPi Javascript. Po naimportování souboru `webiopi.js` je možné použít výše uvedený kód pro vygenerování a odeslání REST požadavku na zavolání makra. Zavoláním funkce `callMacro()` dojde k REST požadavku, který zpracuje WebIOPi na serveru a spustí příslušnou funkci, která je definována v serverovém Python skriptu.
 
+### Místnosti a jejich zapojení osvětlení (LED)
+#### Koupelna
+![](https://github.com/RobinDvorak/mip-raspberry/blob/master/project/public/Bath_room.png)
+#### Ložnice
+![](https://github.com/RobinDvorak/mip-raspberry/blob/master/project/public/Bedroom.png)
+#### Chodba
+![](https://github.com/RobinDvorak/mip-raspberry/blob/master/project/public/Hallway.png)
+#### Kuchyň
+![](https://github.com/RobinDvorak/mip-raspberry/blob/master/project/public/Kitchen.png)
+#### Obývací pokoj
+![](https://github.com/RobinDvorak/mip-raspberry/blob/master/project/public/Living_room.png)
 
 
 
