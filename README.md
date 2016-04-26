@@ -2,12 +2,11 @@
 
 ## Úvod
 
-Projekt Smart Home jsme vytvořili v rámci předmětu s názvem *Minipočítače a jejich praktické aplikace*. Klíčovým prvkem je Raspberry Pi model B, které nám umožňuje jednotné propojení a komunikaci s jednotlivými místnostmi. Pomocí Raspberry Pi, několika LED diod (dále jen LED) a tlačítkových spínačů jsme tedy nasimulovali „chytrou domácnost“. Jednotlivé místnosti v domácnosti je možné ovládat jak přes tlačítkové spínače, tak pomocí webového rozhraní. Domácnost se skládá z následujících místností: Koupelna, Chodba, Obývací pokoj, Ložnice a Kuchyně. Popis jednotlivých místností najdete v příslušné záložce.
-
+Projekt Smart Home vytváříme v rámci předmětu s názvem *Minipočítače a jejich praktické aplikace*. Klíčovým prvkem je Raspberry Pi model B, které nám umožní jednotné propojení a komunikaci s jednotlivými místnostmi. Pomocí Raspberry Pi, několika LED diod a tlačítkových spínačů simulujeme tzv. „chytrou domácnost“. Domácnost se skládá z následujících místností: Koupelna, Chodba, Obývací pokoj, Ložnice a Kuchyně. Jednotlivé místnosti v domácnosti je možné ovládat jak přes tlačítkové spínače, tak za pomoci webového rozhraní. Pro webové rozhraní využíváme knihovny WebIOPi, která je vytvořena predevším pro komunikaci s Raspberry Pi GPIO. Pro detekci hran HW tlačítkových spínačů používáme Python modul RPi.GPIO, na které poté reagujeme pomocí callbacku.
 
 ## Použité technologie
 
-Pro realizaci projektu jsme použili následující technologie a knihovny:
+Pro realizaci projektu Smart Home jsme použili následující technologie a knihovny:
 
 - Python 2
 - [WebIOPi](http://webiopi.trouch.com/) pro webové rozhraní
@@ -22,7 +21,7 @@ Pro realizaci projektu jsme použili následující technologie a knihovny:
 
 ## WebIOPi
 
-Knihovna WebIOPi zajišťuje webový server a poskytuje REST API, které se nadefinuje v Python skriptu, který potom zpracovává REST požadavky a ovládá periferie. V internetovém prohlížeči kienta jsou REST požadavky zasílány pomocí Javascriptu.
+Knihovna WebIOPi zajišťuje webový server a poskytuje REST API, které se nadefinuje v Python skriptu, který potom zpracovává REST požadavky a ovládá periferie. V internetovém prohlížeči klienta jsou REST požadavky zasílány pomocí Javascriptu.
 
 ### Nastavení
 
@@ -30,7 +29,7 @@ Pro nastavení serveru je potřeba upravit konfigurační soubor, do kterého se
 
     webiopi -d -c /etc/webiopi/config
 
-Pomocí následujícího příkazu se aplikace spustí po spuštění počítače:
+Pomocí následujícího příkazu se aplikace spustí po spuštění Raspberry Pi:
 
     update-rc.d webiopi defaults
 
@@ -72,13 +71,13 @@ def button_clicked(pin):
     webiopi.GPIO.digitalWrite(led, value)
 ```
 
-WebIOPi ze skriptu spoští následující funkce:
+WebIOPi ze skriptu spouští následující funkce:
 
-- `setup()` pro nastavení perfierií při spuštění
+- `setup()` pro nastavení periferií při spuštění
 - `loop()` jako aplikační smyčku, jejíž kód probíhá neustále dokola
 - `destroy()` se spustí před ukončením aplikace
 
-Ve funkci `setup()` se nastaví pin s LED jako výstupní pomocí `webiopi.GPIO`. Tlačítka se nastaví pomocí `RPi.GPIO`, protože má podporu pro detekci hran a je možné na ně zareagovat pomocí callbacku. Tento callback se pomocí dekorátoru `@webiopi.macro` zároveň nastaví jako makro, které je možné spustit z webového rozhraní. Funkce `button_clicked` se tedy spustí jak při stisku fyzického tlačítka tak i při kliku z webového rozhraní přes REST.
+Ve funkci `setup()` se nastaví piny s LED diodami jako výstupní pomocí `webiopi.GPIO`. Tlačítka se nastaví pomocí `RPi.GPIO`, protože má podporu pro detekci hran a je možné na ně zareagovat pomocí callbacku. Tento callback se pomocí dekorátoru `@webiopi.macro` zároveň nastaví jako makro, které je možné spustit z webového rozhraní. Funkce `button_clicked` se tedy spustí jak při stisku fyzického tlačítka tak i při kliku z webového rozhraní přes REST.
 
 ### Klientská část
 
@@ -109,7 +108,7 @@ Obývací pokoj je osazen dvěma LED diodami zelené barvy (L3 a L4) a jedním s
 ![](https://github.com/RobinDvorak/mip-raspberry/blob/master/project/public/Living_room.png)
 
 ## Závěr
-Výsledkem projektu Smart Home je funkční model "chytré domácnosti". Projekt je postaven na Raspberry Pi modelu B na kterém běží knihovna WebIOPi. WebIOPi zajišťuje webový server a poskytuje REST API, které nám umožňuje komunikaci s Raspberry Pi přes REST požadavky zasílány pomocí Javascriptu.
+Výsledkem projektu Smart Home je funkční model "chytré domácnosti". Projekt je postaven na Raspberry Pi modelu B na kterém běží knihovna WebIOPi. Při spuštění Raspberry Pi si WebIOPi ze skriptu spustí funkci `setup()`, která nastaví periférie. Dále se WebIOPi dostává k funkci `loop()`, kde se neustále vykonává aplikační smyčka. Zjednodušeně se v této funkci zjištuje stav LED diod a tlačítkových spínačů. Poslední funkcí je `destroy()`, která se spouští před ukončením aplikace. WebIOPi také zajišťuje webový server a poskytuje REST API, které nám umožňuje komunikaci s Raspberry Pi přes REST požadavky zasílány pomocí Javascriptu. Poslední částí je Python modul `RPi.GPIO`, který umožňuje detekci hran HW tlačítek, a tím reakci v podobě callbacku. Callback se pomocí dekorátoru `@webiopi.macro` nastaví jako makro, které lze spustit z webového rozhraní. Raspberry Pi, knihovna WebIOPi a Python modul `RPi.GPIO` jsou tak skvělou kombinací pro komunikaci mezi SW a HW a umožnují jednoduchou implementaci ovládání, debugování a používání Rapsberry Pi GPIO přes webové rozhraní, portable aplikaci nebo mechanicky. 
 
 
 
