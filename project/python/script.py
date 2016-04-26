@@ -78,29 +78,34 @@ def toggle_led(pin):
 
 
 @webiopi.macro
-def b1_clicked(*args):
+def b1_clicked():
     toggle_led(L1)
+    return status()
 
 
 @webiopi.macro
 def b2_clicked():
     toggle_led(L2)
+    return status()
 
 
 @webiopi.macro
 def b3_clicked():
     toggle_led(L2)
+    return status()
 
 
 @webiopi.macro
 def b4_clicked():
     toggle_led(L3)
     toggle_led(L4)
+    return status()
 
 
 @webiopi.macro
 def b5_clicked():
     toggle_led(L5)
+    return status()
 
 
 @webiopi.macro
@@ -110,11 +115,13 @@ def b6_clicked():
     stateL7 = GPIO.digitalRead(L7)
     if not stateL6 and stateL7:
         toggle_led(L7)
+    return status()
 
 
 @webiopi.macro
 def b7_clicked():
     toggle_led(L7)
+    return status()
 
 
 @webiopi.macro

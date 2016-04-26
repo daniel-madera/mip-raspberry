@@ -83,10 +83,8 @@ Ve funkci `setup()` se nastaví pin s LED jako výstupní pomocí `webiopi.GPIO`
 ### Klientská část
 
 ```javascript
-webiopi().ready(function() {
-    // Call when button is clicked.
-    webiopi().callMacro("button_clicked", [], update);
-}
+// Call when button is clicked.
+webiopi().callMacro("button_clicked", [], update);
 ```
 
 Na klientovi zajišťuje komunikaci s WebIOPi Javascript. Po naimportování souboru `webiopi.js` je možné použít výše uvedený kód pro vygenerování a odeslání REST požadavku na zavolání makra. Zavoláním funkce `callMacro()` dojde k REST požadavku, který zpracuje WebIOPi na serveru a spustí příslušnou funkci, která je definována v serverovém Python skriptu.

@@ -244,8 +244,6 @@
     <script src="/webiopi.js"></script>
     <!-- My JS -->
     <script type="text/javascript">
-    //webiopi().ready(function() {
-
     //update UI from response
     var update = function(macro, args, response) {
         //expected {{"L1": "1", "L2": "1"}
@@ -326,8 +324,7 @@
     // update UI every 1000miliseconds
     setInterval(function() {
         webiopi().callMacro("status", [], update);
-    }, 1000);
-    //})
+    }, 500);
     </script>
 </body>
 
