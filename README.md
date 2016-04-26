@@ -93,18 +93,27 @@ Na klientovi zajišťuje komunikaci s WebIOPi Javascript. Po naimportování sou
 ### Místnosti a jejich zapojení osvětlení (LED)
 #### Koupelna
 Koupelna je osazena jednou LED diodou modré barvy (L1) a jedním spínačem (B1). Na sepnutí spínače se příslušná LED diaoda rozsvítí a nebo zhasne podle stavu ve kterém se nachází.
+
 ![](https://github.com/RobinDvorak/mip-raspberry/blob/master/project/public/Bath_room.png)
+
 #### Ložnice
 Ložnice je osazena pouze jednou LED diodou bílé barvy (L5) a jedním spínačem (B5). Spínač funguje jako klascký pokojový přepínač, prvním stiknutím se světlo rozsvítí, druhým pak zhasne.
+
 ![](https://github.com/RobinDvorak/mip-raspberry/blob/master/project/public/Bedroom.png)
+
 #### Chodba
 Chodba je osazena jednou LED diodou červené barvy (L2) a dvěma spínači (B2 a B3). V chodbě máme většinou spínače umístěny na obou stranách. Pokud spínačem (B2) rozsvítíme v hale, tak s ním také můžeme zhasnout a nebo k zhasnutí můžeme využít spínače (B3). Pořadí spínačů můžeme samozřejmě prohazovat.
+
 ![](https://github.com/RobinDvorak/mip-raspberry/blob/master/project/public/Hallway.png)
+
 #### Kuchyň
 Kuchyň je osazena jednou LED diodou červené barvy (L6), jednou LED diodou zelené barvy (L7) a dvěma spínači (B6 a B7). LED dioda (L6) je brána jako osvětlení místnosti a LED dioda (L7) jako osvětlení pracovní plochy. Spínačem (B6) při příchodu do kuchyně rozsvítíme osvětlení v místnosti a spínačem (B7) rozsvítíme osvětlení pracovní plochy. Při odchodu z kuchyně spínačem (B6) vypneme veškeré osvětlení v kuchyni.
+
 ![](https://github.com/RobinDvorak/mip-raspberry/blob/master/project/public/Kitchen.png)
+
 #### Obývací pokoj
 Obývací pokoj je osazen dvěma LED diodami zelené barvy (L3 a L4) a jedním spínačem (B4). Na sepnutí spínače se rozsvítí obě LED diody a při dalším sepnutí spínače obě zhasnou.
+
 ![](https://github.com/RobinDvorak/mip-raspberry/blob/master/project/public/Living_room.png)
 
 ## Závěr
